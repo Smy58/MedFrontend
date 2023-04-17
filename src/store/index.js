@@ -59,7 +59,7 @@ export default createStore({
   },
   actions: {
     GET_PRODUCTS_FROM_API({commit}) {
-      return axios('http://192.168.1.62:8081/meds/getm', {
+      return axios('https://medbackend-production.up.railway.app/meds/getm', {
         method: "GET"
       })
       .then((products) => {
@@ -77,7 +77,7 @@ export default createStore({
       })
     },
     GET_POPPRODUCTS_FROM_API({commit}) {
-      return axios('http://192.168.1.62:8081/meds/top4', {
+      return axios('https://medbackend-production.up.railway.app/meds/top4', {
         method: "GET"
       })
       .then((products) => {
@@ -91,7 +91,7 @@ export default createStore({
       })
     },
     GET_LOWPRODUCTS_FROM_API({commit}) {
-      return axios('http://192.168.1.62:8081/meds/topd', {
+      return axios('https://medbackend-production.up.railway.app/meds/topd', {
         method: "GET"
       })
       .then((products) => {
@@ -105,7 +105,7 @@ export default createStore({
       })
     },
     GET_QUESTIONS_FROM_API({commit}) {
-      return axios('http://192.168.1.62:8081/q/getAll', {
+      return axios('https://medbackend-production.up.railway.app/q/getAll', {
          method: "GET"
       })
        .then((qeuestions) => {
