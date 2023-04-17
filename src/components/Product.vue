@@ -80,12 +80,24 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['PRODUCTS']),
+        ...mapGetters(['PRODUCTS', 'POPPRODUCTS', 'LOWPRODUCTS']),
         product() {
             let result = {};
             let vm = this;
             // console.log(vm.$route.query.productID);
             this.PRODUCTS.map(function (item) {
+                // console.log(item.id);
+                if (parseInt(item.id) === parseInt(vm.$route.query.productID)) {
+                    result = item;
+                }
+            });
+            this.POPPRODUCTS.map(function (item) {
+                // console.log(item.id);
+                if (parseInt(item.id) === parseInt(vm.$route.query.productID)) {
+                    result = item;
+                }
+            });
+            this.LOWPRODUCTS.map(function (item) {
                 // console.log(item.id);
                 if (parseInt(item.id) === parseInt(vm.$route.query.productID)) {
                     result = item;
