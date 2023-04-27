@@ -10,7 +10,9 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import store from '../store/index'
+
 export default {
     name: 'ProductItem',
     props: {
@@ -18,6 +20,8 @@ export default {
     },
     methods: {
         productClick() {
+            var itemToSet = this.product;
+
             console.log(this.item);
             this.$router.push( {name: 'product', query: { 'productID': this.item.id }});
         }
@@ -34,6 +38,7 @@ export default {
         border-radius: 12px;
 
         width: 295px;
+        min-height: 486px;
 
         padding: 12px 19px 24px 19px;
         box-sizing: border-box;
@@ -55,7 +60,7 @@ export default {
         line-height: 28px;
         text-transform: capitalize;
 
-        color: #D89F4C;
+        color: #006fbe;
         text-align: left;
 
         margin: 4px 0 12px 5px;
@@ -70,7 +75,7 @@ export default {
         text-align: left;
 
         margin: 0 0 17px 5px;
-        color: #9E7937;
+        color: #003f6c;
     }
 
     .product-item__btn {
@@ -78,12 +83,16 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 14px 76px;
 
         width: 256px;
         height: 47px;
 
-        background: #60603C;
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        background: #004B81;
         border: none;
         box-sizing: border-box;
         border-radius: 12px;

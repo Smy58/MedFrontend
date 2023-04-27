@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <header :class="isHome ? 'header header_home' : 'header'">
         <router-link to="/" class="header__logo">LOGO</router-link>
 
         <div class="header-katalog">
@@ -10,25 +10,40 @@
             <input type="text" name="katalogInput" id="katalogInput" class="header-katalog__input" placeholder="Поиск по каталогу">
         </div>
 
-        <div class="header-busket">
+        <router-link to="/busket" class="header-busket">
             <div class="header-busket__image"></div>
             <div class="header-busket__text">Корзина</div>
-        </div>
+            <div class="header-busket__count" v-if="BUSKET.length != 0">{{ BUSKET.length }}</div>
+        </router-link>
     </header>
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex';
+
 export default {
     name: 'Header',
     props: {
+        isHome: Boolean
+    },
+    computed: {
+        ...mapGetters(['BUSKET'])
 
+    },
+    methods: {
+        ...mapActions([
+            'GET_BUSKET_FROM_LOCALSTORAGE'
+        ])
+    },
+    mounted() {
+        this.GET_BUSKET_FROM_LOCALSTORAGE()
+        // console.log(this.BUSKET)
     }
 }
 </script>
 
 <style>
     .header {
-        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -38,6 +53,14 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+
+        background: #004B81;
+        position: relative;
+    }
+
+    .header_home {
+        position: absolute;
+        background: transparent;
     }
 
     .links {
@@ -59,7 +82,7 @@ export default {
         font-size: 24px;
         line-height: 28px;
 
-        color: #A3AB84;
+        color: #fff;
 
         margin-left: 116px;
         text-decoration: none;
@@ -74,7 +97,7 @@ export default {
     .header-katalog__btn {
         width: 140px;
         height: 48px;
-        background: #DDE2C9;
+        background: #D8F5FF;
         border-radius: 16px 0px 0px 16px;
 
         display: flex;
@@ -102,7 +125,7 @@ export default {
 
         margin-right: 21px;
 
-        color: #60603C;
+        color: #004B81;
     }
 
     .header-katalog__input {
@@ -121,7 +144,7 @@ export default {
         width: 140px;
         height: 48px;
 
-        background: #DDE2C9;
+        background: #D8F5FF;
         border-radius: 12px;
 
         margin-right: 100px;
@@ -134,6 +157,8 @@ export default {
         align-items: center;
 
         box-sizing: border-box;
+
+        position: relative;
     }
 
     .header-busket__image {
@@ -151,7 +176,32 @@ export default {
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
+        text-decoration: none;
 
-        color: #60603C;
+        color: #004B81;
     }
+
+    .header-busket__count {
+        position: absolute;
+        top: -11px;
+        right: -11px;
+        width: 30px;
+        height: 30px;
+
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: #434A54;
+
+        background: #F2F8FC;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+    }
+
 </style>

@@ -65,7 +65,7 @@ export default {
         font-size: 40px;
         line-height: 48px;
 
-        color: #60603C;
+        color: #004B81;
         margin: 0;
 
         text-align: left;
@@ -82,7 +82,7 @@ export default {
         line-height: 19px;
         letter-spacing: -0.03em;
 
-        color: #A3AB84;
+        color: #66AFE3;
 
         text-align: left;
 
@@ -154,7 +154,7 @@ export default {
         width: 285px;
         height: 47px;
 
-        background: #D89F4C;
+        background: #004B81;
         box-shadow: 0px 2px 10px rgba(216, 159, 76, 0.2);
         border-radius: 12px;
 

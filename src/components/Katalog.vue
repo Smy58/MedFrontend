@@ -6,21 +6,21 @@
         <div class="katalog__title">Каталог</div>
         
         <div class="katalog__filters">
-            <div class="katalog__filter katalog__filter_grey">
+            <div class="katalog__filter katalog__filter_blue">
                 Форма отпуска <div class="katalog__arrow"></div>
             </div>
-            <div class="katalog__filter katalog__filter_orange">
+            <div class="katalog__filter katalog__filter_darkblue">
                 По алфавиту <div class="katalog__arrow"></div>
             </div>
         </div>
 
         <div class="katalog__main">
             <div class="katalog__column">
-                <Category />
-                <PriceBlock :onChange="onChange"/>
+                <Category :onChange="onChangeCategory" :onReset="onResetCategory"/>
+                <PriceBlock :onChange="onChange" :onReset="onReset"/>
 
             </div>
-            <ListBlock :filterCostMin="filterCostMin" :filterCostMax="filterCostMax"/>
+            <ListBlock :filterCostMin="filterCostMin" :filterCostMax="filterCostMax" :filterCategory="filterCategory"/>
 
         </div>
     </div>
@@ -45,12 +45,24 @@ export default {
         return {
             filterCostMin: 200,
             filterCostMax: 200000,
+            filterCategory: '',
         }
     },
     methods: {
         onChange(var1, var2) {
             this.filterCostMin = var1;
             this.filterCostMax = var2;
+        },
+        onChangeCategory(val) {
+            console.log(val);
+            this.filterCategory = val;
+        },
+        onReset() {
+            this.filterCostMin = 200;
+            this.filterCostMax = 200000;
+        },
+        onResetCategory() {
+            this.filterCategory = '';
         }
     }
 }
@@ -60,6 +72,8 @@ export default {
     .katalog {
         padding-top: 48px;
         width: 80%;
+
+        margin-bottom: 48px;
     }
 
     .katalog__nav {
@@ -96,7 +110,7 @@ export default {
         text-transform: uppercase;
         text-align: left;
 
-        color: #D89F4C;
+        color: #004B81;
 
     }
 
@@ -131,15 +145,15 @@ export default {
         color: #F5F5F5;
     }
 
-    .katalog__filter_grey {
+    .katalog__filter_blue {
         width: 211px;
-        background: #A3AB84;
+        background: #66AFE3;
 
     }
 
-    .katalog__filter_orange {
+    .katalog__filter_darkblue {
         width: 189px;
-        background: #D89F4C;
+        background: #004B81;
     }
 
     .katalog__arrow {
@@ -163,5 +177,6 @@ export default {
     .katalog__column {
         display: flex;
         flex-direction: column;
+        width: 23%;
     }
 </style>

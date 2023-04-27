@@ -2,11 +2,11 @@
     <div class="category">
         <h4 class="category__title">Категории</h4>
 
-        <p class="category__item" v-for="item in dataC || []" :key="item.ID">
+        <p class="category__item" v-for="item in dataC || []" :key="item.ID" v-on:click="onClick">
             {{ item.category }}
         </p>
 
-        <div class="category__reset">Сбросить</div>
+        <div class="category__reset" v-on:click="onClickReset">Сбросить</div>
     </div>
 </template>
 
@@ -16,11 +16,21 @@ import dataC from '@/assets/category'
 export default {
     name: 'Category',
     props: {
-
+        onChange: Function,
+        onReset: Function,
     },
     data() {
         return {
             dataC: dataC
+        }
+    },
+    methods: {
+        onClick(ev) {
+            // console.log(this)
+            this.onChange(ev.target.textContent);
+        },
+        onClickReset(ev){
+            this.onReset();
         }
     }
 }
@@ -30,16 +40,18 @@ export default {
     .category {
         box-sizing: border-box;
 
-        width: 295px;
+        width: 100%;
 
         border: 1px solid #D9D9D9;
         border-radius: 18px;
 
         padding: 24px 12px;
+
+        margin-bottom: 12px;
     }
 
     .category__title {
-        width: 270px;
+        width: 95%;
         padding-left: 11px;
         padding-bottom: 10px;
         border-bottom: 0.75px solid #D9D9D9;
@@ -53,7 +65,7 @@ export default {
 
         text-align: left;
 
-        color: #60603C;
+        color: #004B81;
 
         margin-bottom: 24px;
     }
@@ -66,7 +78,7 @@ export default {
         line-height: 23px;
         letter-spacing: -0.03em;
 
-        color: #A3AB84;
+        color: #66AFE3;
 
         text-align: left;
 
@@ -78,7 +90,7 @@ export default {
     }
 
     .category__reset {
-        width: 270px;
+        width: 95%;
         border-top: 0.75px solid #D9D9D9;
         padding-top: 8px;
 
@@ -91,7 +103,7 @@ export default {
 
         letter-spacing: -0.03em;
 
-        color: #D89F4C;
+        color: #004B81;
 
         cursor: pointer;
 

@@ -83,7 +83,7 @@ export default {
         display: flex;
         align-items: center;
 
-        color: #9E7937;
+        color: #004B81;
 
         transition: max-height 1s ease;
         max-height: 0;

@@ -75,7 +75,7 @@ export default {
         margin-top: 35px;
         margin-bottom: 28px;
 
-        color: #60603C;
+        color: #004B81;
     }
 
     

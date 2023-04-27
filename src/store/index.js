@@ -7,6 +7,8 @@ export default createStore({
     questions: [],
     popproduct: [],
     lowproduct: [],
+    busket: [],
+    busketItemId: 1
   },
   getters: {
     PRODUCTS(state) {
@@ -20,9 +22,49 @@ export default createStore({
     },
     QUESTIONS(state) {
       return state.questions;
+    },
+    BUSKET(state) {
+      // console.log(state.busket)
+      return state.busket;
     }
   },
   mutations: {
+    SET_PRODUCTS_TO_BUSKET: (state, products) => {
+      state.busket = products;
+
+      // console.log(localStorage.getItem('busket'));
+    },
+    ADD_PRODUCT_TO_BUSKET: (state, product) => {
+      product.busketId = state.busketItemId;
+      state.busketItemId++;
+      state.busket.push(product);
+      // console.log(state.busket);
+
+      localStorage.setItem('busket', JSON.stringify(state.busket));
+      // console.log(localStorage.getItem('busket'));
+
+    },
+    SET_VALUE_TO_PRODUCT_IN_BUSKET: (state, product) => {
+      var newBusket = []
+      state.busket.forEach((item) => {
+        if (item.busketId == product.busketId){
+          newBusket.push(product);
+        } else {
+          newBusket.push(item);
+        }
+      });
+      state.busket = newBusket;
+      // console.log(state.busket);
+      localStorage.setItem('busket', JSON.stringify(state.busket));
+
+    },
+    REMOVE_PRODUCT_FROM_BUSKET: (state, product) => {
+      state.busket = state.busket.filter((item) => {
+        return item.busketId != product.busketId
+      });
+      console.log(state.busket)
+      localStorage.setItem('busket', JSON.stringify(state.busket));
+    },
     SET_PRODUCTS_TO_STATE: (state, products) => {
       state.products = products;
     },
@@ -34,26 +76,6 @@ export default createStore({
     },
     SET_QUESTIONS_TO_STATE: (state, questions) => {
       state.questions = questions;
-    },
-    SET_FILTERED_BY_COST_PRODUCTS: (state, fval) => {
-      // console.log(fval);
-      var lowP = fval.fmin < fval.fmax ? fval.fmin : fval.fmax;
-      var uppP = fval.fmin > fval.fmax ? fval.fmin : fval.fmax;
-
-      // console.log(lowP, ' sd ', uppP)
-      // console.log(lowP, ' ', uppP);
-      var newArray = [];
-      state.products.forEach((item) => {
-        // console.log(item)
-        if (item.price &&
-            typeof(parseInt(item.price.split(' ').join(''))) == 'number' &&
-            parseInt(item.price.split(' ').join('')) >= lowP &&
-            parseInt(item.price.split(' ').join('')) <= uppP) {
-              newArray.push(item);
-            }
-      });
-      // console.log(newArray)
-      state.products = newArray;
     }
 
   },
@@ -63,12 +85,11 @@ export default createStore({
         method: "GET"
       })
       .then((products) => {
-        console.log(products.data.filter( function(item) {
-          return item.id <= 50;
-        }));
-        commit('SET_PRODUCTS_TO_STATE', products.data.filter( function(item) {
-          return item.id <= 50;
-        }));
+        // console.log(products.data.filter( function(item) {
+        //   return item.id <= 50;
+        // }));
+        commit('SET_PRODUCTS_TO_STATE', products.data);
+        console.log(products)
         return products;
       })
       .catch((error) => {
@@ -81,7 +102,7 @@ export default createStore({
         method: "GET"
       })
       .then((products) => {
-        console.log('pop product: ',products.data);
+        // console.log('pop product: ',products.data);
         commit('SET_POPPRODUCTS_TO_STATE', products.data);
         return products;
       })
@@ -109,7 +130,7 @@ export default createStore({
          method: "GET"
       })
        .then((qeuestions) => {
-         console.log('qeuestions: ', qeuestions.data);
+        //  console.log('qeuestions: ', qeuestions.data);
          commit('SET_QUESTIONS_TO_STATE', qeuestions.data);
          return qeuestions;
        })
@@ -117,12 +138,11 @@ export default createStore({
          console.log(error);
          return error;
        })
-   },
-    FILTER_PRODUCTS_WITH_COST({commit}, fval) {
-      console.log(fval.fmin, ' ', fval.fmax)
-      
-      commit('SET_FILTERED_BY_COST_PRODUCTS', fval);
+    },
+    GET_BUSKET_FROM_LOCALSTORAGE({commit}) {
+      var busketArr = localStorage.getItem('busket');
 
+      commit('SET_PRODUCTS_TO_BUSKET', JSON.parse(busketArr));
     }
   },
   modules: {

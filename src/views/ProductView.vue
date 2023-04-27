@@ -23,10 +23,7 @@ export default {
 </script>
 
 <style>
-    .header {
-        background: #60603C;
-        position: relative;
-    }
+
 
     .product-view {
         display: flex;

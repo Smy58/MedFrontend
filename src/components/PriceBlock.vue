@@ -19,17 +19,17 @@
             <input class="price-block__range" :value="v2" :min="minR" :max="maxR" step="1000" type="range" @input="onChangeRange2">
         </section>
 
-        <div class="price-block__reset">Сбросить</div>
+        <div class="price-block__reset" v-on:click="onResetBlock">Сбросить</div>
     </div>
 </template>
 
 <script>
-import store from '@/store/index'
 
 export default {
     name: 'PriceBlock',
     props: {
         onChange: Function,
+        onReset: Function,
     },
     data() {
         return {
@@ -43,17 +43,21 @@ export default {
         onChangeRange1(ev) {
             // console.log(ev.target.value);
             this.v1 = parseInt(ev.target.value);
-            console.log(this.v1, ' ! ', this.v2)
-            store.dispatch('FILTER_PRODUCTS_WITH_COST', {fmin: this.v1, fmax: this.v2});
+            console.log(this.v1, ' ! ', this.v2);
+            this.onChange(this.v1, this.v2);
             
         },
         onChangeRange2(ev) {
             // console.log(ev.target.value);
             this.v2 = parseInt(ev.target.value);
-            console.log(this.v1, ' ! ', this.v2)
-            store.dispatch('FILTER_PRODUCTS_WITH_COST', {fmin: this.v1, fmax: this.v2});
+            console.log(this.v1, ' ! ', this.v2);
+            this.onChange(this.v1, this.v2);
 
-            
+        },
+        onResetBlock(ev) {
+            this.onReset();
+            this.v1 = 200;
+            this.v2 = 20000;
         }
     }
 }
@@ -63,7 +67,7 @@ export default {
     .price-block {
         box-sizing: border-box;
 
-        width: 295px;
+        width: 100%;
 
         border: 1px solid #D9D9D9;
         border-radius: 18px;
@@ -76,7 +80,7 @@ export default {
     }
 
     .price-block__title {
-        width: 270px;
+        width: 95%;
         padding-left: 11px;
         padding-bottom: 10px;
         border-bottom: 0.75px solid #D9D9D9;
@@ -90,13 +94,13 @@ export default {
 
         text-align: left;
 
-        color: #60603C;
+        color: #004B81;
 
         margin-bottom: 24px;
     }
 
     .price-block__reset {
-        width: 270px;
+        width: 95%;
         border-top: 0.75px solid #D9D9D9;
         padding-top: 8px;
 
@@ -109,7 +113,7 @@ export default {
 
         letter-spacing: -0.03em;
 
-        color: #D89F4C;
+        color: #004B81;
 
         cursor: pointer;
     }
@@ -119,16 +123,16 @@ export default {
         flex-direction: row;
         justify-content: space-between;
 
-        width: 239px;
+        width: 95%;
     }
 
     .price-block__value {
         box-sizing: border-box;
 
-        width: 117px;
+        width: 48%;
         height: 48px;
 
-        border: 0.75px solid #DDE2C9;
+        border: 0.75px solid #66AFE3;
         border-radius: 7.5px;
 
         position: relative;
@@ -150,7 +154,7 @@ export default {
         font-size: 9.75px;
         line-height: 130%;
 
-        color: #D89F4C;
+        color: #004B81;
     }
 
     .price-block__cost {
@@ -162,7 +166,7 @@ export default {
 
         letter-spacing: 0.45px;
 
-        color: #A3AB84;
+        color: #66AFE3;
 
         mix-blend-mode: normal;
         opacity: 0.84;
@@ -173,7 +177,7 @@ export default {
 
     .price-block__slider {
         position: relative;
-        width: 200px;
+        width: 95%;
         height: 35px;
         text-align: center;
     }
@@ -182,7 +186,7 @@ export default {
         position: absolute;
         left: 0;
         top: 15px;
-        width: 200px;
+        width: 100%;
         outline: none;
         margin: 0;
         padding: 0;
@@ -212,7 +216,7 @@ export default {
         outline: none;
         padding: 0;
         margin: 0;
-        background: #60603C;
+        background: #004B81;
     }
 
     .price-block__range::-webkit-slider-thumb {
@@ -220,7 +224,7 @@ export default {
         width: 15px;
         height: 15px;
         border-radius: 50%;
-        background: #60603C;
+        background: #004B81;
         cursor: pointer;
 
     }

@@ -3,7 +3,7 @@
         <div class="info">
             <h3 class="info__title">Онлайн-аптека</h3>
             <p class="info__describe">Мы предоставляем широкий ассортимент продукции, включая  витамины, диетические добавки, медицинские изделия, косметику и другие товары, связанные с здоровьем.</p>
-            <button class="info__btn">К покупкам</button>
+            <router-link to="/katalog" class="info__btn">К покупкам</router-link>
         </div>
     </div>
 </template>
@@ -73,12 +73,12 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 14px 96px;
+        text-decoration: none;
 
         width: 296px;
         height: 47px;
 
-        background: #D89F4C;
+        background: #004B81;
         box-shadow: 0px 2px 10px rgba(216, 159, 76, 0.2);
         border-radius: 12px;
 
@@ -93,5 +93,7 @@ export default {
         color: #EEEEEB;
 
         border: none;
+
+        cursor: pointer;
     }
 </style>

@@ -47,8 +47,9 @@ export default {
         flex-direction: row;
         justify-content: space-between;
 
-        background: #343423;
+        background: #022741;
         box-shadow: 0px 4px 10px rgba(213, 119, 79, 0.25);
+        /* margin-top: 48px; */
     }
 
     .footer__left {

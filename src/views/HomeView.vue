@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header :isHome='true'/>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <Info />

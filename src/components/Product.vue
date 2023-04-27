@@ -15,7 +15,7 @@
                         <div class="product__number">{{ count }}</div>
                         <div :class=" !isPlusActive ? 'product__plus product__plus_dis' : 'product__plus' " v-on:click="onPlus">+</div>
                     </div>
-                    <div class="product__cart-btn">В корзину</div>
+                    <div class="product__cart-btn" v-on:click="addProduct">В корзину</div>
                 </div>
             </div>
 
@@ -33,7 +33,9 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
+
+import store from '../store/index'
 
 export default {
     name: 'Product',
@@ -48,6 +50,11 @@ export default {
         }
     },
     methods: {
+        ...mapActions([
+            'GET_PRODUCTS_FROM_API',
+            'GET_POPPRODUCTS_FROM_API',
+            'GET_LOWPRODUCTS_FROM_API'
+        ]),
         onMinus() {
             console.log('-');
             if(this.count !== 1) {
@@ -77,6 +84,13 @@ export default {
                 this.isPlusActive = true;
             }
 
+        },
+        addProduct() {
+            var itemToAdd = this.product;
+            console.log(itemToAdd);
+            store.commit('ADD_PRODUCT_TO_BUSKET', itemToAdd);
+
+            this.$router.push( {name: 'katalog'});
         }
     },
     computed: {
@@ -85,6 +99,7 @@ export default {
             let result = {};
             let vm = this;
             // console.log(vm.$route.query.productID);
+            // console.log(this.PRODUCTS);
             this.PRODUCTS.map(function (item) {
                 // console.log(item.id);
                 if (parseInt(item.id) === parseInt(vm.$route.query.productID)) {
@@ -103,10 +118,25 @@ export default {
                     result = item;
                 }
             })
+            // console.log(result);
+            // console.log(result.apteka != null);
+            result.count = this.count;
+            if (result.price && typeof(parseInt(result.price.split(' ').join(''))) == 'number') {
+                result.totalCost = this.count * parseInt(result.price.split(' ').join(''));
+
+            }else {
+                result.totalCost = result.price;
+            }
+
             console.log(result);
-            console.log(result.apteka != null);
+            
             return result;
         }
+    },
+    mounted() {
+        this.GET_PRODUCTS_FROM_API();
+        this.GET_POPPRODUCTS_FROM_API();
+        this.GET_LOWPRODUCTS_FROM_API();
     }
 }
 </script>
@@ -155,7 +185,7 @@ export default {
 
         margin-bottom: 25px;
 
-        color: #D89F4C;
+        color: #004B81;
 
     }
 
@@ -206,7 +236,7 @@ export default {
         width: 48px;
         height: 48px;
 
-        background: #60603C;
+        background: #004B81;
         border-radius: 12px;
 
         font-family: 'Roboto';
@@ -224,7 +254,7 @@ export default {
     }
 
     .product__minus_dis, .product__plus_dis {
-        background: #60603c84;
+        background: #004b81a2;
         cursor: default;
 
     }
@@ -242,7 +272,7 @@ export default {
         width: 73.53px;
         height: 48px;
 
-        border: 1px solid #60603C;
+        border: 1px solid #004B81;
         border-radius: 12px;
 
         font-family: 'Roboto';
@@ -252,7 +282,7 @@ export default {
         line-height: 28px;
         text-transform: uppercase;
 
-        color: #A3AB84;
+        color: #66AFE3;
     }
 
     .product__cart-btn {
@@ -264,7 +294,7 @@ export default {
         width: 210px;
         height: 48px;
 
-        background: #60603C;
+        background: #004B81;
         box-shadow: 0px 2px 10px rgba(216, 159, 76, 0.2);
         border-radius: 12px;
 
@@ -277,6 +307,8 @@ export default {
         text-transform: uppercase;
 
         color: #EEEEEB;
+
+        cursor: pointer;
     }
 
     .product__info {
@@ -296,7 +328,7 @@ export default {
         font-size: 20px;
         line-height: 23px;
 
-        color: #A3AB84;
+        color: #256695;
 
         text-align: left;
 
@@ -314,7 +346,7 @@ export default {
         font-size: 20px;
         line-height: 23px;
 
-        color: #9E7937;
+        color: #8CA4B6;
 
         text-align: left;
     }

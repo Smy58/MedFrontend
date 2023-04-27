@@ -1,7 +1,7 @@
 <template>
     <div class="top-products">
         <h3 class="top-products__title">{{ titleTopProducts }}</h3>
-        <BigList :dataList="dataF" />
+        <BigList :dataList="dataF" :isPagination="false"/>
 
     </div>
 </template>
@@ -22,6 +22,9 @@ export default {
         return {
             
         }
+    },
+    mounted() {
+        console.log(this.dataF);
     }
 }
 </script>
@@ -45,6 +48,6 @@ export default {
         margin-top: 48px;
         margin-bottom: 31px;
 
-        color: #D89F4C;
+        color: #004B81;
     }
 </style>

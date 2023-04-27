@@ -1,6 +1,6 @@
 <template>
     <div class="list-block">
-        <BigList :dataList="PRODUCTS" :newfilterCostMin="newfilterCostMin" :newfilterCostMax="newfilterCostMax"/>
+        <BigList :dataList="PRODUCTS" :newfilterCostMin="newfilterCostMin" :newfilterCostMax="newfilterCostMax" :newfilterCategory="newfilterCategory" :isPagination="true"/>
     </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
     name: 'ListBlock',
     props: {
         filterCostMin: Number,
-        filterCostMax: Number
+        filterCostMax: Number,
+        filterCategory: String,
     },
     components: {
         BigList
@@ -32,6 +33,9 @@ export default {
         },
         newfilterCostMax() {
             return this.filterCostMax
+        },
+        newfilterCategory() {
+            return this.filterCategory
         }
     },
     methods: {
@@ -41,13 +45,14 @@ export default {
     },
     mounted() {
         this.GET_PRODUCTS_FROM_API()
+        // console.log(this.filterCategory.length);
     }
 }
 </script>
 
 <style>
     .list-block {
-        width: 80%;
+        width: 75%;
         margin-top: 10px;
     }
 
