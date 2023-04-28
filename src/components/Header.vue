@@ -13,7 +13,7 @@
         <router-link to="/busket" class="header-busket">
             <div class="header-busket__image"></div>
             <div class="header-busket__text">Корзина</div>
-            <div class="header-busket__count" v-if="BUSKET.length != 0">{{ BUSKET.length }}</div>
+            <div class="header-busket__count" v-if=" BUSKET && BUSKET.length != 0">{{ BUSKET.length }}</div>
         </router-link>
     </header>
 </template>
