@@ -144,7 +144,10 @@ export default createStore({
     GET_BUSKET_FROM_LOCALSTORAGE({commit}) {
       var busketArr = localStorage.getItem('busket');
 
-      commit('SET_PRODUCTS_TO_BUSKET', JSON.parse(busketArr));
+      if (busketArr) {
+        commit('SET_PRODUCTS_TO_BUSKET', JSON.parse(busketArr));
+      }
+
     }
   },
   modules: {
