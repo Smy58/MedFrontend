@@ -36,6 +36,8 @@ export default createStore({
     },
     ADD_PRODUCT_TO_BUSKET: (state, product) => {
       product.busketId = state.busketItemId;
+      console.log(state);
+      console.log(state.busket);
       state.busketItemId++;
       state.busket.push(product);
       // console.log(state.busket);
