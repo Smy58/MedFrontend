@@ -1,7 +1,10 @@
 <template>
     <div class="order-view">
+
+        <Preloader :isActive="preloaderStatus"/>
+
         <Header/>
-        <Order/>
+        <Order :setPreloaderActive="setPreloaderActive" :setPreloaderUnActive="setPreloaderUnActive"/>
         <Footer/>
     </div>
 </template>
@@ -10,6 +13,7 @@
 import Header from '@/components/Header.vue'
 import Order from '@/components/Order.vue'
 import Footer from '@/components/Footer.vue'
+import Preloader from '@/components/Preloader.vue'
 
 
 export default {
@@ -17,7 +21,24 @@ export default {
     components: {
       Header,
       Order,
-      Footer
+      Footer,
+      Preloader
+    },
+    data() {
+      return {
+        preloaderStatus: false,
+      }
+    },
+    methods: {
+      setPreloaderActive() {
+        this.preloaderStatus = true;
+        console.log('preloaderStatus: ' + this.preloaderStatus)
+      },
+      setPreloaderUnActive() {
+        this.preloaderStatus = false;
+        console.log('preloaderStatus: ' + this.preloaderStatus)
+
+      }
     }
 }
 </script>

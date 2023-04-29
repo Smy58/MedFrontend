@@ -22,7 +22,8 @@ export default {
         Question
     },
     props: {
-
+        setPreloaderUnActive: Function,
+        setPreloaderActive: Function
     },
     data() {
         return {
@@ -38,7 +39,11 @@ export default {
         ]),
     },
     mounted() {
+        this.setPreloaderActive()
         this.GET_QUESTIONS_FROM_API()
+            .then((res) => {
+                this.setPreloaderUnActive();
+            })
     }
 }
 </script>

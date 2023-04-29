@@ -1,7 +1,9 @@
 <template>
     <div class="busket-view">
+        <Preloader :isActive="preloaderStatus"/>
+
         <Header/>
-        <Busket/>
+        <Busket :setPreloaderActive="setPreloaderActive" :setPreloaderUnActive="setPreloaderUnActive" />
         <Footer />
     </div>
 </template>
@@ -10,14 +12,30 @@
 import Header from '@/components/Header.vue'
 import Busket from '@/components/Busket.vue'
 import Footer from '@/components/Footer.vue'
+import Preloader from '@/components/Preloader.vue'
+
 
 export default {
     name: 'BusketView',
     components: {
       Header,
       Busket,
-      Footer
-    }
+      Footer,
+      Preloader
+    },
+    data() {
+        return {
+            preloaderStatus: false,
+        }
+    },
+     methods: {
+      setPreloaderActive() {
+        this.preloaderStatus = true;
+      },
+      setPreloaderUnActive() {
+        this.preloaderStatus = false;
+      }
+  },
 }
 </script>
 

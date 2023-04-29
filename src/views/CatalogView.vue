@@ -1,7 +1,10 @@
 <template>
   <div class="catalog-view">
+
+    <Preloader :isActive="preloaderStatus"/>
+
     <Header />
-    <Katalog />
+    <Katalog :setPreloaderActive="setPreloaderActive" :setPreloaderUnActive="setPreloaderUnActive" />
     <Footer/>
   </div>
 </template>
@@ -10,6 +13,7 @@
 import Header from '@/components/Header.vue'
 import Katalog from '@/components/Katalog.vue'
 import Footer from '@/components/Footer.vue'
+import Preloader from '@/components/Preloader.vue'
 
 
 export default {
@@ -17,7 +21,24 @@ export default {
     components: {
       Header,
       Katalog,
-      Footer
+      Footer,
+      Preloader
+    },
+    data() {
+      return {
+        preloaderStatus: false,
+      }
+    },
+    methods: {
+      setPreloaderActive() {
+        this.preloaderStatus = true;
+        console.log('preloaderStatus: ' + this.preloaderStatus)
+      },
+      setPreloaderUnActive() {
+        this.preloaderStatus = false;
+        console.log('preloaderStatus: ' + this.preloaderStatus)
+
+      }
     }
 }
 </script>

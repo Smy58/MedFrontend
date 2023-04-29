@@ -16,6 +16,8 @@ export default {
         filterCostMin: Number,
         filterCostMax: Number,
         filterCategory: String,
+        setPreloaderUnActive: Function,
+        setPreloaderActive: Function
     },
     components: {
         BigList
@@ -44,7 +46,18 @@ export default {
         ]),
     },
     mounted() {
-        this.GET_PRODUCTS_FROM_API()
+        let vm = this
+        vm.$route.query.search
+        if(vm.$route.query && vm.$route.query.search){
+
+        } else {
+            this.setPreloaderActive()
+            console.log('prel');
+            this.GET_PRODUCTS_FROM_API()
+                .then((res) => {
+                    this.setPreloaderUnActive()
+                })
+        }
         // console.log(this.filterCategory.length);
     }
 }

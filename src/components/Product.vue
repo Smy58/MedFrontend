@@ -23,6 +23,7 @@
                 <p class="product__name" v-if="product.category != null">Категория: <span class="product__desc">{{ product.category }}</span></p>
                 <p class="product__name" v-if="product.apteka != null">Аптека: <span class="product__desc">{{ product.apteka }}</span></p>
                 <p class="product__name" v-if="product.recepie != null">Форма отпуска: <span class="product__desc">{{ product.recepie }}</span></p>
+                <p class="product__name" v-if="product.analogue != null">Аналоги: <span class="product__desc">{{ product.analogue }}</span></p>
                 <p class="product__name">Цена: <span class="product__desc">{{ product.price ? product.price : "Уточнить в Аптеке" }}</span></p>
                 <p class="product__name product__name_l" v-if="product.description">Описание: </p>
                 <p class="product__desc" v-if="product.description">{{ product.description }}</p>
@@ -128,7 +129,7 @@ export default {
                 result.totalCost = result.price;
             }
 
-            console.log(result);
+            // console.log(result);
             
             return result;
         }

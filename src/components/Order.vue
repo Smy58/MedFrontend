@@ -5,18 +5,24 @@
         </p>
         <div class="order__title">Оформление</div>
 
-        <div class="order__row">
+        <form class="order__form" v-on:submit.prevent="handleSubmit">
             <div class="order__column">
                 <div class="order__part">
                     <p class="order__pos">Контактные данные</p>
                     <input v-model="name" type="text" class="order__input" name="nameInput" placeholder="*Имя">
+                    <span class="order__error" v-if="v$.name.required.$invalid">Поле не должно быть пустым</span>
                     <input v-model="phone" type="text" class="order__input" name="phoneInput" placeholder="*Номер телефона">
+                    <span class="order__error" v-if="v$.phone.required.$invalid">Поле не должно быть пустым</span>
+
                 </div>
                 
                 <div class="order__part">
                     <p class="order__pos">Адрес доставки</p>
                     <input v-model="city" type="text" class="order__input" name="cityInput" placeholder="*Город">
+                    <span class="order__error" v-if="v$.city.required.$invalid">Поле не должно быть пустым</span>
+
                     <input v-model="street" type="text" class="order__input" name="streetInput" placeholder="*Улица">
+                    <span class="order__error" v-if="v$.street.required.$invalid">Поле не должно быть пустым</span>
 
                     <div class="order__adress">
                         <input v-model="home" type="text" class="order__input order__input_sm" name="homeInput" placeholder="*Дом">
@@ -24,6 +30,8 @@
                         <input v-model="floor" type="text" class="order__input order__input_sm" name="floorInput" placeholder="Этаж">
                         
                     </div>
+                    <span class="order__error" v-if="v$.home.required.$invalid">Поле дом не должно быть пустым</span>
+
                     <textarea v-model="subinfo" class="order__area" name="infoInput" id="info-input" cols="30" rows="10" placeholder="Дополнительные сведения для упрощения доставки"></textarea>
 
                 </div>
@@ -55,6 +63,8 @@
                         Доставка почтой - от 2500 тг (Расчитывается индивидуально)
                     </label>
                     
+                    <span class="order__error" v-if="v$.delivery.required.$invalid">Поле не должно быть пустым</span>
+
 
                 </div>
                 
@@ -64,7 +74,9 @@
                 <div class="order__part">
                     <p class="order__pos">Выберете удобное время</p>
                     <input v-model="date" type="text" name="datiInput" id="datiInput" class="order__date" onfocus="(this.type='date')" placeholder="*Выберите дату">
-                
+                    <span class="order__error" v-if="v$.date.required.$invalid">Поле не должно быть пустым</span>
+
+
                     <div class="order__time">
                         <input v-model="time" value="14:00 - 17:00" type="radio" name="timeInput" id="timeInput-1" class="order__radio">
                         <label class="order__radio-label" for="timeInput-1">14:00 - 17:00</label>
@@ -75,6 +87,8 @@
                         <input v-model="time" value="20:00 - 23:00" type="radio" name="timeInput" id="timeInput-3" class="order__radio">
                         <label class="order__radio-label" for="timeInput-3">20:00 - 23:00</label>
                     </div>
+                    <span class="order__error" v-if="v$.time.required.$invalid">Поле не должно быть пустым</span>
+
                     
                 </div>
 
@@ -85,6 +99,9 @@
                         <option value="Kaspi перевод" class="order__payment-item">Kaspi перевод</option>
                         <option value="Наличными" class="order__payment-item">Наличными</option>
                     </select>
+
+                    <span class="order__error" v-if="v$.payment.required.$invalid">Поле не должно быть пустым</span>
+
                 </div>
 
                 <div class="order-submit">
@@ -102,20 +119,26 @@
                         <p class="order-submit__val order-submit__val_2">{{ totalCost }} тг</p>
                     </div>
 
-                    <div :class=" totalCount == 0 ? 'order-submit__bt order-submit__bt_dis' : 'order-submit__bt' " v-on:click="onSubmit" >Заказать</div>
+                    <button :class=" isValid ? 'order-submit__bt order-submit__bt_dis' : 'order-submit__bt' " type="submit" >Заказать</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 
 export default {
     name: 'Order',
     props: {
-
+        setPreloaderUnActive: Function,
+        setPreloaderActive: Function
+    },
+    setup () {
+        return { v$: useVuelidate() }
     },
     data() {
         return {
@@ -130,37 +153,80 @@ export default {
             delivery: '',
             date: '',
             time: '',
-            payment: ''
+            payment: '',
+
+        }
+    },
+    validations () {
+        return {
+            name: { required }, 
+            phone: { required },
+            city: { required },
+            street: { required },
+            home: { required },
+            delivery: { required },
+            date: { required },
+            time: { required },
+            payment: { required }
         }
     },
     methods: {
         ...mapActions([
-            'GET_BUSKET_FROM_LOCALSTORAGE'
+            'GET_BUSKET_FROM_LOCALSTORAGE',
+            'POST_ORDER'
         ]),
-        onSubmit() {
+        handleSubmit() {
+            if (this.v$.$invalid) {
+                this.v$.$touch()
+                return 0;
+            }
+            var val ='';
+            this.BUSKET.forEach((item) => {
+                // console.log(item);
+                val += 'id: ' +item.id + ' ';
+                val += item.name + ' ,cost: ';
+                val += item.price + ' * ';
+                val += item.count + ' = ';
+                val += item.totalCost + '; ';
+                
+
+            })
             var res = {
                 name: this.name,
                 phone: this.phone,
-                city: this.city,
-                street: this.street,
-                home: this.home,
-                apartment: this.apartment,
-                floor: this.floor,
-                subinfo: this.subinfo,
+                address: this.city + ' ' + this.street + ' дом ' + this.home + ', кв ' + this.apartment + ', этаж ' + this.floor,
+                optional: this.subinfo,
                 delivery: this.delivery,
                 date: this.date,
                 time: this.time,
                 payment: this.payment,
-                busket: this.BUSKET
+                busket: val,
+                totalcost: this.totalCost
             }
-            console.log(res);
+            // console.log(res);
+            this.setPreloaderActive()
+            this.POST_ORDER(res)
+                .then((ind) => {
+                    this.setPreloaderUnActive();
 
-            this.$router.push( {name: 'confirm'});
+                    this.$router.push( {name: 'confirm', query: { 'orderID': ind }});
+                })    
+
+            
 
         }
     },
     computed: {
         ...mapGetters(['BUSKET']),
+        isValid() {
+            console.log(this.v$.$invalid);
+
+            if(this.v$.$invalid) {
+                return true;
+            }
+
+            return false;
+        },
         totalCost() {
             var sum = 0;
             this.BUSKET.forEach((item) => {
@@ -239,7 +305,7 @@ export default {
 
     }
 
-    .order__row {
+    .order__form {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -288,6 +354,14 @@ export default {
         box-sizing: border-box;
 
         margin-bottom: 8px;
+    }
+
+    .order__error {
+        color: red;
+        font-size: 12px;
+        margin-top: -5px;
+        margin-bottom: 10px;
+        margin-left: 25px;
     }
 
     .order__adress {
@@ -431,6 +505,8 @@ export default {
 
         -webkit-appearance: none;
         -moz-appearance: none;
+
+        margin-bottom: 8px;
     }
 
     .order-submit {
@@ -547,6 +623,9 @@ export default {
         margin: 28px auto 0 auto;
 
         cursor: pointer;
+
+        border: none;
+
     }
 
     .order-submit__bt_dis {

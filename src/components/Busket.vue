@@ -49,7 +49,8 @@ export default {
         BusketItem
     },
     props: {
-
+        setPreloaderUnActive: Function,
+        setPreloaderActive: Function
     },
     computed: {
         ...mapGetters(['BUSKET']),
@@ -88,7 +89,11 @@ export default {
         }
     },
     mounted() {
+        this.setPreloaderActive()
         this.GET_BUSKET_FROM_LOCALSTORAGE()
+            .then((res) => {
+                this.setPreloaderUnActive()
+            })
         // console.log(this.BUSKET)
     }
 }

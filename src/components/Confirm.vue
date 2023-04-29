@@ -1,7 +1,7 @@
 <template>
     <div class="confirm">
         <div class="confirm__img"></div>
-        <h3 class="confirm__title">Ваш заказ #123 принят</h3>
+        <h3 class="confirm__title">Ваш заказ #{{order}} принят</h3>
         <p class="confirm__text">Ожидайте звонка от курьера</p>
         <div class="confirm__line"></div>
         <router-link to="/" class="confirm__link">На главную</router-link>
@@ -14,6 +14,12 @@ export default {
     data() {
         return {
 
+        }
+    },
+    computed: {
+        order() {
+            let vm = this;
+            return vm.$route.query.orderID
         }
     }
 }

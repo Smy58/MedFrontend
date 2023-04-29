@@ -3,11 +3,11 @@
         <router-link to="/" class="header__logo">LOGO</router-link>
 
         <div class="header-katalog">
-            <router-link to="/katalog" class="header-katalog__btn">
+            <router-link to="/katalog" class="header-katalog__btn" v-on:click="handleKatalog">
                 <div class="header-katalog__image"></div>
                 <div class="header-katalog__text">Каталог</div>
             </router-link>
-            <input type="text" name="katalogInput" id="katalogInput" class="header-katalog__input" placeholder="Поиск по каталогу">
+            <input type="text" v-model="searchInput" v-on:keyup.enter="handleEnter" name="katalogInput" id="katalogInput" class="header-katalog__input" placeholder="Поиск по каталогу">
         </div>
 
         <router-link to="/busket" class="header-busket">
@@ -26,14 +26,29 @@ export default {
     props: {
         isHome: Boolean
     },
+    data() {
+        return {
+            searchInput: ''
+        }
+    },
     computed: {
         ...mapGetters(['BUSKET'])
 
     },
     methods: {
         ...mapActions([
-            'GET_BUSKET_FROM_LOCALSTORAGE'
-        ])
+            'GET_BUSKET_FROM_LOCALSTORAGE',
+            'GET_SEARCH_PRODUCTS',
+            'GET_PRODUCTS_FROM_API'
+        ]),
+        handleEnter(ev) {
+            // console.log(this.searchInput)
+            this.GET_SEARCH_PRODUCTS(this.searchInput);
+            this.$router.push( {name: 'katalog', query: { 'search': this.searchInput }});
+        }, 
+        handleKatalog(ev) {
+            this.GET_PRODUCTS_FROM_API();
+        }
     },
     mounted() {
         this.GET_BUSKET_FROM_LOCALSTORAGE()

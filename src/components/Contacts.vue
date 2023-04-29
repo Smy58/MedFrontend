@@ -1,12 +1,12 @@
 <template>
     <div class="contacts-bg">
-        <form class="contacts">
+        <form class="contacts" v-on:submit.prevent="handleSubmit">
             <h3 class="contacts__title">Связаться с нами</h3>
             <p class="contacts__describe">Если у вас есть вопросы по качеству обслуживания или доставки товаров, то заполите форму ниже и наши менеджеры напишут вам в ближайшее время </p>
 
-            <input class="contacts__input" name="name-input" id="name-input" placeholder="*Имя"/>
-            <input class="contacts__input" name="phone-input" id="phone-input" placeholder="*Номер телефона"/>
-            <textarea class="contacts__area" name="message-input" id="message-input" cols="30" rows="10" placeholder="Введите сюда ваш вопрос"></textarea>
+            <input class="contacts__input" v-model="name" name="name-input" id="name-input" placeholder="*Имя"/>
+            <input class="contacts__input" v-model="phone" name="phone-input" id="phone-input" placeholder="*Номер телефона"/>
+            <textarea class="contacts__area" v-model="info" name="message-input" id="message-input" cols="30" rows="10" placeholder="Введите сюда ваш вопрос"></textarea>
 
             <button class="contacts__submit" type="submit">Отправить</button>
         </form>
@@ -14,10 +14,34 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex';
+
 export default {
     name: 'Contacts',
+    data() {
+        return {
+            name: '',
+            phone: '',
+            info: ''
+        }
+    },
     props: {
-
+        setPreloaderUnActive: Function,
+        setPreloaderActive: Function
+    },
+    methods: {
+        ...mapActions([
+            'POST_INFO'
+        ]),
+        handleSubmit() {
+            var res = {name: this.name, phone: this.phone, info: this.info};
+            console.log(this)
+            this.setPreloaderActive()
+            this.POST_INFO(res)
+                .then((val) => {
+                    this.setPreloaderUnActive();
+                })
+        }
     }
 }
 </script>

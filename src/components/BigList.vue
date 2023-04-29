@@ -68,11 +68,12 @@ export default {
                 }
 
                 this.dataList.forEach((item) => {
+                    // console.log(item);
                     if (item.price &&
                         typeof(parseInt(item.price.split(' ').join(''))) == 'number' &&
                         parseInt(item.price.split(' ').join('')) >= lowP &&
                         parseInt(item.price.split(' ').join('')) <= uppP) {
-                            if (isFilterCategory && item.category.includes(str)){
+                            if (isFilterCategory && item.category && item.category.includes(str)){
                                 newArray.push(item);
                             } else if(!isFilterCategory) {
                                 newArray.push(item);
@@ -108,7 +109,7 @@ export default {
             if (this.filtredData.length % 18 > 0) {
                 ls++;
             }
-            console.log(ls)
+            // console.log(ls)
 
             return ls;
         }

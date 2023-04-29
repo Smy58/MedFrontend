@@ -20,7 +20,7 @@
                 <PriceBlock :onChange="onChange" :onReset="onReset"/>
 
             </div>
-            <ListBlock :filterCostMin="filterCostMin" :filterCostMax="filterCostMax" :filterCategory="filterCategory"/>
+            <ListBlock :filterCostMin="filterCostMin" :filterCostMax="filterCostMax" :filterCategory="filterCategory" :setPreloaderActive="setPreloaderActive" :setPreloaderUnActive="setPreloaderUnActive"/>
 
         </div>
     </div>
@@ -34,7 +34,8 @@ import PriceBlock from '@/components/PriceBlock.vue'
 export default {
     name: 'Katalog',
     props: {
-
+        setPreloaderUnActive: Function,
+        setPreloaderActive: Function
     },
     components: {
         Category,
