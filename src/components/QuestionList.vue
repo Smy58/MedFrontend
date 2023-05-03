@@ -50,7 +50,7 @@ export default {
 
 <style>
     .questions {
-        width: 1240px;
+        width: 100%;
         min-height: 553px;
         background: #FFFFFF;
         border-radius: 24px;
@@ -87,6 +87,12 @@ export default {
 
     .questions__list {
         width: 843px;
+    }
+
+    @media screen and (max-width: 950px){
+        .questions__list {
+            width: 80%;
+        }
     }
 
     

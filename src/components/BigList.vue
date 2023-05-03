@@ -156,7 +156,7 @@ export default {
         flex-wrap: wrap;
 
         align-items: center;
-        justify-content: flex-end;
+        justify-content: center;
 
         box-sizing: border-box;
 

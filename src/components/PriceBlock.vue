@@ -77,6 +77,9 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        background: #F2F8FC;
+
     }
 
     .price-block__title {

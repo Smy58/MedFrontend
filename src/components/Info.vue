@@ -96,4 +96,35 @@ export default {
 
         cursor: pointer;
     }
+
+    @media screen and (max-width: 1000px){
+        .info {
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            position: relative;
+
+            width: 75%;
+        }
+
+        .info__title {
+            font-size: 40px;
+            line-height: 45px;
+            margin-bottom: 17px;
+        }
+
+        .info__describe {
+            width: 100%;
+            font-size: 18px;
+            line-height: 23px;
+            margin-bottom: 30px;
+        }
+
+        .info__btn {
+            width: 40%;
+            font-size: 14px;
+            line-height: 16px;
+            min-width: 180px;
+        }
+    }
 </style>

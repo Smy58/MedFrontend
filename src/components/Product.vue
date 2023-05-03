@@ -313,13 +313,15 @@ export default {
     }
 
     .product__info {
-        width: 694px;
+        max-width: 694px;
         height: 100%;
 
         background: #FFFFFF;
         border-radius: 12px;
 
         padding: 24px 32px;
+
+        box-sizing: border-box;
     }
 
     .product__name {
@@ -350,5 +352,71 @@ export default {
         color: #8CA4B6;
 
         text-align: left;
+    }
+
+    @media screen and (max-width: 900px){
+        .product__title {
+            font-size: 55px;
+            line-height: 60px;
+        }
+
+        .product__image {
+            width: 300px;
+            height: 300px;
+            padding: 30px;
+        }
+
+        .product__count {
+            width: 148px;
+        }
+
+        .product__minus, .product__plus {
+            width: 38px;
+            height: 38px;
+        }
+
+        .product__number {
+            height: 38px;
+            width: 62px;
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        .product__cart-btn {
+            height: 38px;
+            width: 130px;
+
+            font-size: 14px;
+            line-height: 16px;
+        }
+
+        .product__name, .product__desc {
+            font-size: 16px;
+            line-height: 18px;
+
+        }
+    }
+
+    @media screen and (max-width: 750px){
+        .product {
+            width: 90%;
+        }
+    }
+
+    @media screen and (max-width: 650px){
+
+        .product__block {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product__column {
+            margin-bottom: 20px;
+        }
+
+        .product__info {
+            padding: 24px 0;
+            width: 100%;
+        }
     }
 </style>

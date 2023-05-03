@@ -5,6 +5,10 @@
             <div class="footer__contacts">
                 <p class="footer__contact">+7-777-111-22-33</p>
                 <p class="footer__contact">mail@gmail.com</p>
+                <div class="footer__social footer__social_mobile">
+                    <div class="footer__insta"></div>
+                    <div class="footer__wa"></div>
+                </div>
             </div>
             <div class="footer__nav">
                 <div class="footer__link">Главная</div>
@@ -13,7 +17,7 @@
             </div>
         </div>
         <div class="footer__right">
-            <div class="footer__social">
+            <div class="footer__social footer__social_desktop">
                 <div class="footer__insta"></div>
                 <div class="footer__wa"></div>
             </div>
@@ -53,7 +57,7 @@ export default {
     }
 
     .footer__left {
-        width: 40%;
+        width: 60%;
     }
 
     .footer__logo {
@@ -132,6 +136,10 @@ export default {
         justify-content: end;
     }
 
+    .footer__social_mobile {
+        display: none;
+    }
+
     .footer__insta {
         background: url('@/assets/Footer/insta-logo.png');
         background-repeat: no-repeat;
@@ -168,6 +176,52 @@ export default {
         color: #FFFFFF;
 
         text-align: right;
+    }
+
+    @media screen and (max-width: 770px){
+        .footer {
+            flex-direction: column;
+            width: 100%;
+            padding: 20px 24px 24px 24px;
+            height: min-content;
+        }
+
+        .footer__left {
+            width: 100%;
+        }
+
+        .footer__contacts {
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer__social_mobile {
+            display: flex;
+            margin: 0;
+        }
+
+        .footer__social_desktop {
+            display: none;
+        }
+
+        .footer__link {
+            text-align: left;
+        }
+
+        .footer__nav {
+            margin-bottom: 20px;
+        }
+
+        .footer__copyright {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .footer__text {
+            text-align: left;
+        }
     }
     
 </style>

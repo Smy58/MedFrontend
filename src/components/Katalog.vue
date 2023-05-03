@@ -1,5 +1,7 @@
 <template>
     <div class="katalog">
+        <div :class="mobileFilter ? 'katalog__dark-bg katalog__dark-bg_active' : 'katalog__dark-bg'" v-on:click="onMobile"></div>
+
         <p class="katalog__nav">
             <router-link to="/" class="katalog__link">Главная</router-link> <router-link to="/katalog" class="katalog__link katalog__link_active">/ Каталог</router-link>
         </p>
@@ -12,10 +14,13 @@
             <div class="katalog__filter katalog__filter_darkblue">
                 По алфавиту <div class="katalog__arrow"></div>
             </div>
+            <div class="katalog__filter katalog__filter_darkblue katalog__filter_mobile" v-on:click="onMobile">
+                <div class="katalog__filter__img"></div>
+            </div>
         </div>
 
         <div class="katalog__main">
-            <div class="katalog__column">
+            <div :class="mobileFilter ? 'katalog__column katalog__column_active' : 'katalog__column'">
                 <Category :onChange="onChangeCategory" :onReset="onResetCategory"/>
                 <PriceBlock :onChange="onChange" :onReset="onReset"/>
 
@@ -47,9 +52,13 @@ export default {
             filterCostMin: 200,
             filterCostMax: 200000,
             filterCategory: '',
+            mobileFilter: false
         }
     },
     methods: {
+        onMobile() {
+            this.mobileFilter = !this.mobileFilter;
+        },
         onChange(var1, var2) {
             this.filterCostMin = var1;
             this.filterCostMax = var2;
@@ -164,6 +173,7 @@ export default {
         background: url('@/assets/Katalog/filter-arrow.png');
         background-repeat: no-repeat;
         background-size: contain;
+        background-position: center;
     }
 
     .katalog__main {
@@ -179,5 +189,115 @@ export default {
         display: flex;
         flex-direction: column;
         width: 23%;
+        min-width: 280px;
+    }
+
+    .katalog__dark-bg {
+        position: absolute;
+        display: none;
+    }
+
+    .katalog__filter_mobile {
+        display: none;
+        position: absolute;
+    }
+
+    @media screen and (max-width: 1200px){
+        .katalog {
+            width: 90%;
+        }
+    }
+
+    @media screen and (max-width: 1000px){
+        .katalog__column {
+            position: absolute;
+            left: -300px;
+            transform: translateX(-50%);
+
+            z-index: 10;
+            transition: left 1s ease;
+
+
+        }
+
+        .katalog__column_active {
+            left: 50%;
+        }
+        
+        .list-block {
+            width: 100%;
+        }
+
+        .katalog__dark-bg {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .katalog__dark-bg_active {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background: #000;
+            opacity: 0.3;
+            z-index: 8;
+        }
+
+        .katalog__filter_mobile {
+            display: flex;
+            position: relative;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .katalog__filter__img {
+            background: url(@/assets/filter-button.png);
+            width: 28px;
+            height: 28px;
+
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    }
+
+    @media screen and (max-width: 600px){
+        .katalog__title {
+            font-size: 45px;
+        }
+
+        .katalog__filters {
+            gap: 0;
+            justify-content: space-between;
+        }
+        .katalog__filter {
+            font-size: 15px;
+            line-height: 19px;
+            justify-content: space-around;
+            width: 40%;
+            padding: 3px 2px;
+            gap: 0;
+        }
+
+        .katalog__filter_mobile {
+            justify-content: center;
+            width: 40px;
+        }
+
+        .pagination__btn, .pagination__block {
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+
+            font-size: 11px;
+            line-height: 13px;
+        }
     }
 </style>

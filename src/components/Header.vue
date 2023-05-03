@@ -1,20 +1,32 @@
 <template>
     <header :class="isHome ? 'header header_home' : 'header'">
-        <router-link to="/" class="header__logo">LOGO</router-link>
+        <div class="header__mobile">
+            <router-link to="/" class="header__logo">LOGO</router-link>
 
-        <div class="header-katalog">
-            <router-link to="/katalog" class="header-katalog__btn" v-on:click="handleKatalog">
-                <div class="header-katalog__image"></div>
-                <div class="header-katalog__text">Каталог</div>
+            <router-link to="/busket" class="header-busket">
+                <div class="header-busket__image"></div>
+                <div class="header-busket__text">Корзина</div>
+                <div class="header-busket__count" v-if=" BUSKET && BUSKET.length != 0">{{ BUSKET.length }}</div>
             </router-link>
-            <input type="text" v-model="searchInput" v-on:keyup.enter="handleEnter" name="katalogInput" id="katalogInput" class="header-katalog__input" placeholder="Поиск по каталогу">
         </div>
+        <div class="header__desktop">
+            <router-link to="/" class="header__logo header__logo_desktop">LOGO</router-link>
 
-        <router-link to="/busket" class="header-busket">
-            <div class="header-busket__image"></div>
-            <div class="header-busket__text">Корзина</div>
-            <div class="header-busket__count" v-if=" BUSKET && BUSKET.length != 0">{{ BUSKET.length }}</div>
-        </router-link>
+            <div class="header-katalog">
+                <router-link to="/katalog" class="header-katalog__btn" v-on:click="handleKatalog">
+                    <div class="header-katalog__image"></div>
+                    <div class="header-katalog__text">Каталог</div>
+                </router-link>
+                <input type="text" v-model="searchInput" v-on:keyup.enter="handleEnter" name="katalogInput" id="katalogInput" class="header-katalog__input" placeholder="Поиск по каталогу">
+            </div>
+
+            <router-link to="/busket" class="header-busket header-busket_desktop">
+                <div class="header-busket__image"></div>
+                <div class="header-busket__text">Корзина</div>
+                <div class="header-busket__count" v-if=" BUSKET && BUSKET.length != 0">{{ BUSKET.length }}</div>
+            </router-link>
+        </div>
+        
     </header>
 </template>
 
@@ -62,15 +74,29 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100px;
 
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
 
         background: #004B81;
         position: relative;
+
+        z-index: 10;
+    }
+
+    .header__desktop {
+        height: 100px;
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        position: relative;
+
+        z-index: 10;
     }
 
     .header_home {
@@ -99,7 +125,6 @@ export default {
 
         color: #fff;
 
-        margin-left: 116px;
         text-decoration: none;
 
     }
@@ -129,6 +154,7 @@ export default {
         background:  url('@/assets/Header/katalog-btn.png');
 
         background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .header-katalog__text {
@@ -162,7 +188,6 @@ export default {
         background: #D8F5FF;
         border-radius: 12px;
 
-        margin-right: 100px;
         padding-left: 18px;
         padding-right: 18px;
 
@@ -183,6 +208,7 @@ export default {
         background: url('@/assets/Header/header-busket.png');
 
         background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .header-busket__text {
@@ -219,4 +245,103 @@ export default {
         border-radius: 50%;
     }
 
+    .header__mobile {
+        display: none;
+    }
+
+    @media screen and (max-width: 1000px){
+        .header {
+            padding-top: 16px;
+        }
+
+        .header__mobile {
+            display: flex;
+            width: 80%;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header__desktop {
+            width: 80%;
+            height: 70px;
+
+        }
+
+        .header__logo_desktop {
+            display: none;
+        }
+
+        .header-busket_desktop {
+            display: none;
+        }
+
+        .header-busket {
+            width: 120px;
+            height: 40px;
+        }
+
+        .header-busket__image {
+            width: 20px;
+            height: 20px;
+        }
+
+        .header-busket__text {
+            font-size: 15px;
+            line-height: 17px;
+        }
+
+        .header-busket__count {
+            width: 25px;
+            height: 25px;
+            font-size: 11px;
+            line-height: 14px;
+        }
+
+        .header-katalog {
+            width: 100%;
+        }
+
+        .header-katalog__btn {
+            width: 140px;
+        }
+
+        .header-katalog__input {
+            width: calc(100% - 140px);
+        }
+    }
+
+    @media screen and (max-width: 500px){
+        .header__mobile {
+            width: 90%;
+        }
+
+        .header__desktop {
+            width: 90%;
+
+        }
+
+        .header-katalog__btn {
+            width: 90px;
+            height: 40px;
+        }
+
+        .header-katalog__text {
+            font-size: 12px;
+            line-height: 14px;
+            margin-right: 10px;
+        }
+
+        .header-katalog__image {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .header-katalog__input {
+            width: calc(100% - 90px);
+            height: 40px;
+
+            font-size: 14px;
+
+        }
+    }
 </style>

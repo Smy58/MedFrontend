@@ -48,6 +48,8 @@ export default {
         padding: 24px 12px;
 
         margin-bottom: 12px;
+
+        background: #F2F8FC;
     }
 
     .category__title {

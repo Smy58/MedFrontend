@@ -64,10 +64,9 @@ export default {
         box-sizing: border-box;
 
         position: absolute;
-        width: 715px;
-        height: 481px;
+        width: 51%;
         left: 50%;
-        top: 152px;
+        top: 50%;
 
         background: #FFFFFF;
         border: 1px solid #E8E8E8;
@@ -75,7 +74,7 @@ export default {
 
         padding: 32px 56px 36px 56px;
 
-        transform: translate(-15%, 0);
+        transform: translate(-15%, -50%);
 
         display: flex;
         flex-direction: column;
@@ -118,7 +117,7 @@ export default {
 
         padding: 16px 24px;
 
-        width: 602px;
+        width: 100%;
         height: 51px;
 
         background: #FFFFFF;
@@ -144,8 +143,8 @@ export default {
         padding: 16px 24px;
 
 
-        width: 602px;
-        height: 120px;
+        width: 100%;
+        height: 150px;
 
         background: #FFFFFF;
         border: 1px solid #E8E8E8;
@@ -175,7 +174,7 @@ export default {
         align-items: center;
         padding: 14px 96px;
 
-        width: 285px;
+        width: 46%;
         height: 47px;
 
         background: #004B81;
@@ -195,6 +194,36 @@ export default {
 
         border: none;
 
+    }
+
+    @media screen and (max-width: 1000px){
+        .contacts {
+            width: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .contacts__area {
+            height: 120px;
+        }
+        
+    }
+
+    @media screen and (max-width: 500px){
+        .contacts {
+            padding: 10px;
+            
+        }
+        .contacts__title {
+            font-size: 30px;
+            line-height: 42px;
+        }
+
+        .contacts__describe {
+            font-size: 14px;
+            line-height: 16px;
+
+        }
     }
 
 

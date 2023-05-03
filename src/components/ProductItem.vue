@@ -38,7 +38,7 @@ export default {
         border-radius: 12px;
 
         width: 295px;
-        min-height: 486px;
+        min-height: 436px;
 
         padding: 12px 19px 24px 19px;
         box-sizing: border-box;
@@ -108,4 +108,5 @@ export default {
         color: #EEEEEB;
 
     }
+
 </style>

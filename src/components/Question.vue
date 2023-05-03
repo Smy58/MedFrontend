@@ -33,7 +33,7 @@ export default {
 
 <style>
     .question {
-        width: 843px;
+        width: 100%;
         padding: 20px 15px ;
         box-sizing: border-box;
 
@@ -85,16 +85,15 @@ export default {
 
         color: #004B81;
 
-        transition: max-height 1s ease;
-        max-height: 0;
+        transition: max-height 0.7s ease;
         overflow: hidden;
-
+        max-height: 0;
         
 
     }
 
     .question.active .question__paragraph {
-        max-height: 120px;
+        max-height: 500px;
     }
 
     .question.active .question__arrow {
