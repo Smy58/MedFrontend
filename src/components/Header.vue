@@ -1,7 +1,8 @@
 <template>
     <header :class="isHome ? 'header header_home' : 'header'">
         <div class="header__mobile">
-            <router-link to="/" class="header__logo">LOGO</router-link>
+            <router-link to="/" :class="isHome ? 'header__logo' : 'header__logo header__logo_wh'">
+            </router-link>
 
             <router-link to="/busket" class="header-busket">
                 <div class="header-busket__image"></div>
@@ -10,7 +11,8 @@
             </router-link>
         </div>
         <div class="header__desktop">
-            <router-link to="/" class="header__logo header__logo_desktop">LOGO</router-link>
+            <router-link to="/" :class="isHome ? 'header__logo header__logo_desktop' : 'header__logo header__logo_wh header__logo_desktop'">
+            </router-link>
 
             <div class="header-katalog">
                 <router-link to="/katalog" class="header-katalog__btn" v-on:click="handleKatalog">
@@ -40,7 +42,7 @@ export default {
     },
     data() {
         return {
-            searchInput: ''
+            searchInput: '',
         }
     },
     computed: {
@@ -127,6 +129,21 @@ export default {
 
         text-decoration: none;
 
+        background: url(@/assets/logo1.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        width: 60px;
+        height: 60px;
+
+    }
+
+    .header__logo_wh {
+        background: url(@/assets/logo2.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     .header-katalog {
