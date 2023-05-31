@@ -633,4 +633,130 @@ export default {
         cursor: default;
     }
 
+    @media screen and (max-width: 1000px){
+        .order {
+            width: 90%;
+        }
+        .order__title {
+            font-size: 8vw;
+        }
+
+        .order__form {
+            flex-direction: column;
+        }
+
+        .order__column_2 {
+            align-items: center;
+        }
+        
+        .order__part {
+            width: 100%;
+        }
+
+        .order__pos {
+            font-size: 3.6vw;
+
+            text-align: start;
+        }
+
+        .order__input {
+            width: 100%;
+            height: 7.9vw;
+            font-size: 2.4vw;
+        }
+
+        .order__error {
+            font-size: 2.2vw;
+            text-align: start;
+        }
+        
+        .order__area {
+            width: 100%;
+            font-size: 2.4vw;
+
+        }
+        
+        .order__radio-label {
+            width: 100%;
+            font-size: 2.4vw;
+
+        }
+
+        .order__date {
+            width: 60%;
+            height: 7.9vw;
+            font-size: 2.4vw;
+
+        }
+
+        .order__date::-webkit-calendar-picker-indicator {
+            opacity: 1;
+            display: block;
+            background: url(@/assets/calendar.png) no-repeat;
+            background-size: contain;
+            width: 5vw;
+            height: 5vw;
+
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .order__column_2 {
+            width: 100%;
+        }
+
+
+        .order-submit {
+            width: 70%;
+            padding: 3.8vw 4.5vw;
+        }
+
+        .order-submit__title {
+            font-size: 4.5vw;
+            line-height: 5vw;
+        }
+
+        .order-submit__text {
+            font-size: 2.6vw;
+            line-height: 3vw;
+        }
+
+        .order-submit__opt, .order-submit__val {
+            font-size: 2.3vw;
+            line-height: 2.7vw;
+        }
+        
+        .order-submit__opt_2, .order-submit__val_2 {
+            font-size: 2.6vw;
+            line-height: 3vw;
+        }
+
+        .order-submit__bt {
+            width: 36vw;
+            height: 6.3vw;
+
+            font-size: 2.5vw;
+            line-height: 2.8vw;
+        }
+
+        .order__time {
+            flex-wrap: wrap;
+        }
+
+        .order__time .order__radio-label {
+            width: 22.5vw;
+            font-size: 2.6vw;
+            margin-right: 1vw;
+            text-align: center;
+        } 
+
+        .order__payment {
+            width: 60%;
+            height: 7.9vw;
+            font-size: 2.4vw;
+        }
+    }
+
 </style>

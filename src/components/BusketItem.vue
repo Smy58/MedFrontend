@@ -233,4 +233,60 @@ export default {
 
         cursor: pointer;
     }
+
+    @media screen and (max-width: 1000px){
+
+        .busket-item {
+            width: 100%;
+            flex-wrap: wrap;
+            position: relative;
+
+            justify-content: space-between;
+
+            row-gap: 10px;
+        }
+
+        .busket__del {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            margin: 0;
+            width: 7vw;
+            height: 7vw;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .busket-item__img {
+            width: 25vw;
+            height: 25vw;
+        }
+
+        .busket-item__title {
+            font-size: 4.5vw;
+            line-height: 5vw;
+            width: 45vw;
+            margin: 0;
+
+            margin-right: 7vw;
+        }
+
+        .busket-item__cost {
+            font-size: 4.5vw;
+            line-height: 5vw;
+            margin: 0;
+        }
+
+        .busket-item__minus, .busket-item__plus {
+            width: 6vw;
+            height: 6vw;
+        }
+
+        .busket-item__number {
+            width: 9.21vw;
+            height: 6vw;
+            font-size: 3.5vw;
+        }
+    }
 </style>

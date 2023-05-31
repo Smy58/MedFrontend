@@ -311,4 +311,58 @@ export default {
         cursor: default;
     }
 
+    @media screen and (max-width: 1000px){
+        .busket {
+            width: 90%;
+        }
+
+        .busket__title {
+            font-size: 8vw;
+        }
+
+        .busket__list {
+            width: 100%;
+            margin-bottom: 32px;
+        }
+
+        .busket__row {
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .busket-submit {
+            width: 70%;
+            padding: 32px 39px;
+        }
+
+        .busket-submit__title {
+            font-size: 4.5vw;
+            line-height: 5vw;
+        }
+
+        .busket-submit__text {
+            font-size: 2.6vw;
+            line-height: 3vw;
+        }
+
+        .busket-submit__opt, .busket-submit__val {
+            font-size: 2.3vw;
+            line-height: 2.7vw;
+        }
+        
+        .busket-submit__opt_2, .busket-submit__val_2 {
+            font-size: 2.6vw;
+            line-height: 3vw;
+        }
+
+        .busket-submit__bt {
+            width: 36vw;
+            height: 6.3vw;
+
+            font-size: 2.5vw;
+            line-height: 2.8vw;
+        }
+    }
+
 </style>
